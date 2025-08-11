@@ -8,6 +8,7 @@ export default function QRModal({ data, onClose }) {
 
   return (
     <div className="modal">
+      <button className="close-button" onClick={onClose}>×</button>
       <h2>Contribute</h2>
       {address ? (
         <>
@@ -17,7 +18,6 @@ export default function QRModal({ data, onClose }) {
       ) : (
         <p><em>No wallet address available</em></p>
       )}
-      <button onClick={onClose}>Close</button>
     </div>
   );
 }

@@ -1,11 +1,165 @@
 .card {
-  background: white;
+  display: flex;
+  flex-direction: row;
+  background: #fefefe;
+  border-radius: 1rem;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.06);
   padding: 1.5rem;
-  border-radius: 10px;
-  box-shadow: 0 0 8px rgba(0, 0, 0, 0.05);
-  margin-bottom: 1rem;
-  position: relative;
+  gap: 2rem;
+  margin-bottom: 2rem;
   font-family: system-ui, sans-serif;
+  position: relative;
+}
+
+.card-left {
+  width: 200px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 1rem;
+}
+
+.thumbnail {
+  width: 100%;
+  aspect-ratio: 1 / 1;
+  background: #ddd;
+  border-radius: 0.75rem;
+}
+
+.title {
+  font-size: 1.5rem;
+  font-weight: bold;
+  margin: 0;
+}
+
+.authors {
+  color: #555;
+  font-size: 0.9rem;
+}
+
+.fund-btn {
+  background: #FFA726;
+  color: white;
+  border: none;
+  font-weight: bold;
+  padding: 0.6rem 1.2rem;
+  border-radius: 0.5rem;
+  cursor: pointer;
+  font-size: 1rem;
+}
+
+.card-right {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.tags span {
+  background: #d0edf6;
+  color: #234;
+  font-size: 0.75rem;
+  padding: 0.25rem 0.5rem;
+  margin-right: 0.25rem;
+  border-radius: 0.5rem;
+  font-weight: 500;
+}
+
+.description {
+  color: #333;
+  font-size: 0.95rem;
+}
+
+.tiers {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+
+.tier span {
+  background: #FFEB3B;
+  padding: 0.25rem 0.5rem;
+  border-radius: 0.4rem;
+  font-weight: bold;
+  margin-right: 0.5rem;
+}
+
+.progress .bar {
+  height: 8px;
+  background: #ccc;
+  border-radius: 1rem;
+  overflow: hidden;
+  margin: 0.5rem 0;
+  position: relative;
+}
+
+.progress .filled {
+  background: #4caf50;
+  height: 100%;
+  position: absolute;
+  left: 0;
+  top: 0;
+}
+
+.milestones {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 1rem;
+  font-size: 0.75rem;
+  color: #aaa;
+  position: relative;
+}
+
+.step {
+  flex: 1;
+  text-align: center;
+  cursor: pointer;
+  padding: 0.25rem 0;
+  position: relative;
+}
+
+.step.active {
+  color: #283748;
+  font-weight: bold;
+}
+
+.step::before {
+  content: '';
+  width: 8px;
+  height: 8px;
+  background: #bbb;
+  display: block;
+  margin: 0 auto 0.25rem;
+  border-radius: 50%;
+}
+
+.step.active::before {
+  background: #283748;
+}
+
+.status-badge {
+  position: absolute;
+  top: 3.7rem;
+  right: 1rem;
+  padding: 0.3rem 0.6rem;
+  border-radius: 0.5rem;
+  font-size: 0.75rem;
+  font-weight: bold;
+  color: white;
+  z-index: 2;
+}
+
+.status-completed {
+  background-color: #28a745;
+}
+.status-inprogress {
+  background-color: #fbc02d;
+}
+.status-blocked {
+  background-color: #e53935;
+}
+.status-notstarted {
+  background-color: #888;
 }
 
 .menu-button {
@@ -14,91 +168,12 @@
   right: 1rem;
   background: none;
   border: none;
-  font-size: 1.2rem;
+  font-size: 1.25rem;
   cursor: pointer;
+  line-height: 1;
+  z-index: 3;
 }
 
-.status-badge {
-  position: absolute;
-  top: 1rem;
-  right: 3rem;
-  padding: 0.3rem 0.6rem;
-  border-radius: 4px;
-  font-size: 0.75rem;
-  font-weight: bold;
-  color: white;
-}
-
-.status-completed {
-  background-color: #28a745;
-}
-.status-inprogress {
-  background-color: #FDDA0D;
-}
-.status-blocked {
-  background-color: #dc3545;
-}
-.status-notstarted {
-  background-color: #888;
-}
-
-.contribute-button {
-  background: #283748;
-  border: none;
-  color: white;
-  padding: 0.75rem 1.5rem;
-  font-weight: bold;
-  border-radius: 5px;
-  cursor: pointer;
-}
-
-.progress-bar {
-  background: #eee;
-  border-radius: 10px;
-  height: 16px;
-  margin-top: 0.5rem;
-  position: relative;
-}
-
-.progress {
-  background: #808080;
-  height: 100%;
-  border-radius: 10px;
-  z-index: 1;
-  position: relative;
-}
-
-.checkpoint {
-  position: absolute;
-  top: 0;
-  width: 12px;
-  height: 12px;
-  background-color: white;
-  border: 2px solid #aaa;
-  border-radius: 50%;
-  z-index: 2;
-  cursor: pointer;
-}
-
-.checkpoint.filled {
-  background-color: #283748;
-}
-
-.checkpoint-label {
-  position: absolute;
-  top: 20px;
-  font-size: 0.65rem;
-  color: #555;
-  transform: translateX(-50%);
-  white-space: nowrap;
-}
-
-.milestone-label {
-  cursor: pointer;
-  padding: 2px 6px;
-  border-radius: 4px;
-}
-
-.milestone-label:hover {
-  background-color: #ddd;
+.menu-button:hover {
+  opacity: 0.8;
 }

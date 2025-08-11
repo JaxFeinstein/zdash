@@ -39,44 +39,61 @@ export default function Card({ card, currency, exchangeRate, onOpenModal }) {
     onOpenModal('qr', { address: wallet_addresses });
   };
 
+  const stages = ['Analyze', 'Design', 'Develop', 'Deploy', 'Maintain'];
+  const stagePercents = [0, 25, 50, 75, 100];
+
   return (
     <div className="card">
-      <button className="menu-button" onClick={openDetails}>⋯</button>
+      <button
+        className="menu-button"
+        aria-label="Open details menu"
+        title="Details"
+        onClick={openDetails}
+      >
+        ⋯
+      </button>
       <div className={`status-badge ${statusClass}`}>{status}</div>
-      <h3>{title}</h3>
-      <p>👤 {creators}<br />📅 {date}</p>
-      <p><strong>{formatAmount()}</strong></p>
-
-      <div className="progress-bar" data-progress={progress}>
-        <div className="progress" style={{ width: `${progress}%` }}></div>
-
-        {['Analyze', 'Design', 'Develop', 'Deploy', 'Maintain'].map((milestone, i) => {
-          const left = [0, 25, 50, 75, 98][i];
-          const isFilled = progress >= left;
-          return (
-            <div key={milestone}>
-              <div
-                className={`checkpoint ${isFilled ? 'filled' : ''}`}
-                style={{ left: `${left}%` }}
-                onClick={() => onOpenModal('milestone', { name: milestone })}
-              ></div>
-              <div
-                className="checkpoint-label"
-                style={{ left: `${left + 1}%` }}
-              >
-                <span
-                  className="milestone-label"
-                  onClick={() => onOpenModal('milestone', { name: milestone })}
-                >
-                  {milestone}
-                </span>
-              </div>
-            </div>
-          );
-        })}
+      <div className="card-left">
+        <div className="thumbnail"></div>
+        <button className="fund-btn" onClick={openQR}>CONTRIBUTE</button>
       </div>
-      <br />
-      <button className="contribute-button" onClick={openQR}>CONTRIBUTE</button>
+      <div className="card-right">
+        <h3 className="title">{title}</h3>
+        <div className="authors">👤 {creators} &nbsp; 📅 {date}</div>
+
+        <div className="tags">
+          {tags && tags.map((tag, i) => <span key={i}>{tag}</span>)}
+        </div>
+
+        <p className="description">{description}</p>
+
+        <div className="tiers">
+          <div className="tier">
+            <span>PRIORITY: {priority}</span>
+            <span>{formatAmount()}</span>
+          </div>
+        </div>
+
+        <div className="progress">
+          <div className="bar">
+            <div className="filled" style={{ width: `${progress}%` }}></div>
+          </div>
+          <div className="milestones">
+            {stages.map((stage, i) => {
+              const active = progress >= stagePercents[i];
+              return (
+                <div
+                  className={`step ${active ? 'active' : ''}`}
+                  key={stage}
+                  onClick={() => onOpenModal('milestone', { name: stage })}
+                >
+                  {stage}
+                </div>
+              );
+            })}
+          </div>
+        </div>
+      </div>
     </div>
   );
-}
+}  
